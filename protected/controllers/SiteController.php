@@ -62,24 +62,52 @@ class SiteController extends Controller
          * returns corresponding songs of the selected albums
          */
         public function actionGetSongs(){
-            sleep(10);
+            //sleep(10);
             $model = new Songs();
             //print_r($_POST);
             $albumlist = @$_POST['albumlist'];
             //print_r($albumlist);
-            //$albumlist= "[1,2]";
+            $albumlist= "[1,2]";
             if($albumlist != ""){
                 
             $albumlist = substr($albumlist,1);
             $albumlist = substr($albumlist,0,-1);
             //echo $albumlist;
-            $response = $model->getSongs($albumlist);
+//            $data = Songs::model()->findAll('album1 in ('.$albumlist.') || album2 in ('.$albumlist.')'
+//                    . '|| album3 in ('.$albumlist.') || album4 in ('.$albumlist.') || album5 in ('.$albumlist.')');
+            $data = Songs::model()->findAll();
+            $i = 0;
+            $response = null;
+            foreach ($data as $song){
+                $response[$i] = ["id"=>$song->id,"title"=>$song->song_name,"url"=>Yii::app()->params['siteUrl']."/songs/kannada/".$song->song_url];
+                $i++;
+            }
+            
             if(isset($response)){
                 echo json_encode($response);
             }
             
         }
         }
+//        public function actionGetSongs(){
+//            sleep(10);
+//            $model = new Songs();
+//            //print_r($_POST);
+//            $albumlist = @$_POST['albumlist'];
+//            //print_r($albumlist);
+//            $albumlist= "[1,2]";
+//            if($albumlist != ""){
+//                
+//            $albumlist = substr($albumlist,1);
+//            $albumlist = substr($albumlist,0,-1);
+//            //echo $albumlist;
+//            $response = $model->getSongs($albumlist);
+//            if(isset($response)){
+//                echo json_encode($response);
+//            }
+//            
+//        }
+//        }
         /**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.

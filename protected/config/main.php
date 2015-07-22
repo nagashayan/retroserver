@@ -51,10 +51,10 @@ return array(
 		// uncomment the following to use a MySQL database
 		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=retro_db',
+			'connectionString' => 'mysql:host=retrodb.cid4jt6jn4cy.us-west-2.rds.amazonaws.com;port=3306;dbname=retrodb',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+			'username' => 'root_retrodb',
+			'password' => 'root_retrodb',
 			'charset' => 'utf8',
 		),
 		
@@ -84,5 +84,6 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+            'siteUrl' => 'http://retroserver-env.elasticbeanstalk.com '
 	),
 );
